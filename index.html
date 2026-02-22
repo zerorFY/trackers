@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Freya's Daily Learning Tracker - Track study progress with a cute Kuromi theme">
+    <title>🖤 Freya's Learning Tracker ✨</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💀</text></svg>">
+</head>
+
+<body>
+
+    <!-- Floating Kuromi decorations -->
+    <div class="floating-deco">💀</div>
+    <div class="floating-deco">🎀</div>
+    <div class="floating-deco">⭐</div>
+    <div class="floating-deco">🖤</div>
+    <div class="floating-deco">✨</div>
+    <div class="floating-deco">🎀</div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="kuromi-banner">🖤 💀 🎀 ✨ 🎀 💀 🖤</div>
+            <h1 class="header-title">Freya's Learning Tracker</h1>
+            <p class="header-subtitle">✨ A little progress each day ✨</p>
+
+            <!-- Total Score -->
+            <div class="score-card">
+                <span class="score-label">Total<br>Score</span>
+                <span class="score-value" id="totalScore">8</span>
+            </div>
+
+            <!-- Watch Progress -->
+            <div class="watch-progress-section">
+                <span class="watch-progress-label">⌚ Watch Quest Progress</span>
+                <div class="watch-progress-bar-bg">
+                    <div class="watch-progress-bar-fill" id="watchProgressFill" style="width: 0%"></div>
+                </div>
+                <span class="watch-progress-text" id="watchProgressText">0 / 100 fragments collected</span>
+            </div>
+        </header>
+
+        <!-- Week Navigation -->
+        <nav class="week-nav">
+            <button id="prevWeek" aria-label="Previous week">◀</button>
+            <span class="week-label" id="weekLabel">Loading...</span>
+            <button id="nextWeek" aria-label="Next week">▶</button>
+        </nav>
+
+        <!-- Week Progress -->
+        <div class="week-progress">
+            <span class="progress-text">Week Progress:</span>
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progressFill" style="width: 0%"></div>
+            </div>
+            <span class="progress-text" id="progressText">0/0 days</span>
+        </div>
+
+        <!-- Tracker Table -->
+        <div class="tracker-card">
+            <table class="tracker-table">
+                <thead>
+                    <tr id="headerRow">
+                        <th class="item-header">📋 Items</th>
+                        <th class="day-header"><span class="day-name">Sun</span><span class="day-date"></span></th>
+                        <th class="day-header"><span class="day-name">Mon</span><span class="day-date"></span></th>
+                        <th class="day-header"><span class="day-name">Tue</span><span class="day-date"></span></th>
+                        <th class="day-header"><span class="day-name">Wed</span><span class="day-date"></span></th>
+                        <th class="day-header"><span class="day-name">Thu</span><span class="day-date"></span></th>
+                        <th class="day-header"><span class="day-name">Fri</span><span class="day-date"></span></th>
+                        <th class="day-header"><span class="day-name">Sat</span><span class="day-date"></span></th>
+                    </tr>
+                </thead>
+                <tbody id="trackerBody">
+                    <!-- Rendered by JS -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Decorative row -->
+        <div class="deco-row">💀 🎀 ⭐ 🖤 ✨ 🎀 💀</div>
+
+        <!-- Footer -->
+        <div class="footer">Made with 💜 for Freya · Kuromi Style 🖤</div>
+    </div>
+
+    <!-- Watch Fragment Modal -->
+    <div class="watch-modal-overlay" id="watchModal">
+        <div class="watch-modal">
+            <span class="watch-icon">⌚</span>
+            <div class="modal-title" id="modalTitle">✨ New Watch Fragment! ✨</div>
+            <div class="modal-text" id="modalText">Amazing job, Freya!</div>
+            <div class="fragment-display" id="modalFragmentCount">0 / 100</div>
+            <div class="fragment-grid" id="fragmentGrid"></div>
+            <button class="close-btn" id="closeWatchModal">Got it! 🎀</button>
+        </div>
+    </div>
+
+    <!-- Confetti container -->
+    <div class="confetti-container" id="confettiContainer"></div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
