@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Freya's Daily Learning Tracker - Track study progress with a cute Kuromi theme">
+    <title>🖤 Freya's Learning Tracker ✨</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💀</text></svg>">
+</head>
+
+<body>
+
+    <!-- Floating Kuromi decorations -->
+    <div class="floating-deco">💀</div>
+    <div class="floating-deco">🎀</div>
+    <div class="floating-deco">⭐</div>
+    <div class="floating-deco">🖤</div>
+    <div class="floating-deco">✨</div>
+    <div class="floating-deco">🎀</div>
+
+    <div class="container" id="mainApp">
+        <!-- Export button (top-right) -->
+        <button class="export-btn" id="exportBtn" title="Export CSV">
+            <span class="export-icon">📊</span>
+            <span class="export-text">Export</span>
+        </button>
+
+        <!-- Header -->
+        <header class="header">
+            <div class="kuromi-banner">🖤 💀 🎀 ✨ 🎀 💀 🖤</div>
+            <h1 class="header-title">Freya's Learning Tracker</h1>
+            <p class="header-subtitle">✨ A little progress each day ✨</p>
+
+            <!-- Total Score -->
+            <div class="score-card">
+                <span class="score-label">Total<br>Score</span>
+                <span class="score-value" id="totalScore">8</span>
+            </div>
+
+            <!-- Watch Progress -->
+            <div class="watch-progress-section">
+                <span class="watch-progress-label">⌚ Watch Quest Progress</span>
+                <div class="watch-progress-bar-bg">
+                    <div class="watch-progress-bar-fill" id="watchProgressFill" style="width: 0%"></div>
+                </div>
+                <span class="watch-progress-text" id="watchProgressText">0 / 100 fragments collected</span>
+            </div>
+        </header>
+
+        <!-- Week Navigation -->
+        <nav class="week-nav">
+            <button id="prevWeek" class="nav-btn" aria-label="Previous week">◀</button>
+            <span class="week-label" id="weekLabel">Loading...</span>
+            <button id="nextWeek" class="nav-btn" aria-label="Next week">▶</button>
+        </nav>
+
+        <!-- Week Progress -->
+        <div class="week-progress">
+            <span class="progress-text">Week Progress:</span>
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progressFill" style="width: 0%"></div>
+            </div>
+            <span class="progress-text" id="progressText">0/0 days</span>
+        </div>
+
+        <!-- Tracker Table -->
+        <div class="tracker-card">
+            <table class="tracker-table">
+                <thead>
+                    <tr id="headerRow">
+                        <th class="item-header">📋 Items</th>
+                        <th class="day-header"><span class="day-name">Sun</span><span class="day-date"></span></th>
+                        <th class="day-header"><span class="day-name">Mon</span><span class="day-date"></span></th>
+                        <th class="day-header"><span class="day-name">Tue</span><span class="day-date"></span></th>
+                        <th class="day-header"><span class="day-name">Wed</span><span class="day-date"></span></th>
+                        <th class="day-header"><span class="day-name">Thu</span><span class="day-date"></span></th>
+                        <th class="day-header"><span class="day-name">Fri</span><span class="day-date"></span></th>
+                        <th class="day-header"><span class="day-name">Sat</span><span class="day-date"></span></th>
+                    </tr>
+                </thead>
+                <tbody id="trackerBody">
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Confirm Button -->
+        <div class="confirm-section">
+            <p class="confirm-hint" id="confirmHint">📝 Check today's completed items, then press confirm to save!</p>
+            <button class="confirm-btn" id="confirmBtn">
+                <span class="confirm-btn-icon">✅</span>
+                <span class="confirm-btn-text">Confirm & Save</span>
+            </button>
+        </div>
+
+        <!-- Decorative row -->
+        <div class="deco-row">💀 🎀 ⭐ 🖤 ✨ 🎀 💀</div>
+
+        <!-- Footer -->
+        <div class="footer">Made with 💜 for Freya · Kuromi Style 🖤</div>
+    </div>
+
+    <!-- Password Dialog (shown when confirming save) -->
+    <div class="password-overlay" id="passwordOverlay">
+        <div class="password-modal">
+            <div class="lock-icon">🔒</div>
+            <h2 class="lock-title">Enter Password to Save</h2>
+            <p class="lock-text">请确认后再提交</p>
+            <div class="pin-input-row" id="pinRow">
+                <div class="pin-dot" id="dot0"></div>
+                <div class="pin-dot" id="dot1"></div>
+                <div class="pin-dot" id="dot2"></div>
+                <div class="pin-dot" id="dot3"></div>
+            </div>
+            <p class="lock-error" id="lockError"></p>
+            <div class="numpad">
+                <button class="numpad-btn" data-num="1">1</button>
+                <button class="numpad-btn" data-num="2">2</button>
+                <button class="numpad-btn" data-num="3">3</button>
+                <button class="numpad-btn" data-num="4">4</button>
+                <button class="numpad-btn" data-num="5">5</button>
+                <button class="numpad-btn" data-num="6">6</button>
+                <button class="numpad-btn" data-num="7">7</button>
+                <button class="numpad-btn" data-num="8">8</button>
+                <button class="numpad-btn" data-num="9">9</button>
+                <button class="numpad-btn numpad-clear" data-num="clear">✕</button>
+                <button class="numpad-btn" data-num="0">0</button>
+                <button class="numpad-btn numpad-back" data-num="back">⌫</button>
+            </div>
+            <button class="cancel-password-btn" id="cancelPassword">Cancel</button>
+        </div>
+    </div>
+
+    <!-- Watch Animation Modal (~10s) -->
+    <div class="watch-modal-overlay" id="watchModal">
+        <div class="watch-modal">
+            <!-- Phase 1: Stars gathering (0-2s) -->
+            <div class="watch-phase" id="watchPhase1">
+                <div class="gathering-text">✨ Collecting fragments... ✨</div>
+                <div class="star-burst" id="starBurst"></div>
+            </div>
+
+            <!-- Phase 2: Watch assembling (2-6s) -->
+            <div class="watch-phase" id="watchPhase2" style="display:none;">
+                <div class="watch-assemble">
+                    <div class="watch-body" id="watchBody">
+                        <div class="watch-face" id="watchFace">
+                            <div class="watch-glow-ring"></div>
+                            <div class="watch-center-dot"></div>
+                            <div class="watch-hand watch-hand-hour"></div>
+                            <div class="watch-hand watch-hand-minute"></div>
+                            <div class="watch-hour-mark" style="--i:0"></div>
+                            <div class="watch-hour-mark" style="--i:1"></div>
+                            <div class="watch-hour-mark" style="--i:2"></div>
+                            <div class="watch-hour-mark" style="--i:3"></div>
+                            <div class="watch-hour-mark" style="--i:4"></div>
+                            <div class="watch-hour-mark" style="--i:5"></div>
+                            <div class="watch-hour-mark" style="--i:6"></div>
+                            <div class="watch-hour-mark" style="--i:7"></div>
+                            <div class="watch-hour-mark" style="--i:8"></div>
+                            <div class="watch-hour-mark" style="--i:9"></div>
+                            <div class="watch-hour-mark" style="--i:10"></div>
+                            <div class="watch-hour-mark" style="--i:11"></div>
+                        </div>
+                        <div class="watch-band watch-band-top"></div>
+                        <div class="watch-band watch-band-bottom"></div>
+                        <div class="watch-crown"></div>
+                    </div>
+                    <div class="sparkle-container" id="sparkleContainer"></div>
+                </div>
+                <div class="assembling-text">⌚ Watch is assembling... ⌚</div>
+            </div>
+
+            <!-- Phase 3: Celebration (6-8s) -->
+            <div class="watch-phase" id="watchPhase3" style="display:none;">
+                <div class="celebration-emoji">🎉</div>
+                <div class="modal-title" id="modalTitle">✨ New Watch Fragment! ✨</div>
+                <div class="modal-text" id="modalText">Amazing job, Freya!</div>
+                <div class="fragment-display" id="modalFragmentCount">0 / 100</div>
+            </div>
+
+            <!-- Phase 4: Fragment grid (8-10s) -->
+            <div class="watch-phase" id="watchPhase4" style="display:none;">
+                <div class="modal-title">🗺️ Watch Quest Map</div>
+                <div class="fragment-grid" id="fragmentGrid"></div>
+                <div class="fragment-display" id="modalFragmentCount2" style="font-size:1.4rem;margin-top:12px;">0 / 100
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confetti container -->
+    <div class="confetti-container" id="confettiContainer"></div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
