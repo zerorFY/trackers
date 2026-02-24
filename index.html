@@ -21,7 +21,37 @@
     <div class="floating-deco">✨</div>
     <div class="floating-deco">🎀</div>
 
-    <div class="container">
+    <!-- Password Lock Screen -->
+    <div class="lock-overlay" id="lockOverlay">
+        <div class="lock-modal">
+            <div class="lock-icon">🔒</div>
+            <h2 class="lock-title">Freya's Tracker</h2>
+            <p class="lock-text">Enter password to edit</p>
+            <div class="pin-input-row" id="pinRow">
+                <div class="pin-dot" id="dot0"></div>
+                <div class="pin-dot" id="dot1"></div>
+                <div class="pin-dot" id="dot2"></div>
+                <div class="pin-dot" id="dot3"></div>
+            </div>
+            <p class="lock-error" id="lockError"></p>
+            <div class="numpad">
+                <button class="numpad-btn" data-num="1">1</button>
+                <button class="numpad-btn" data-num="2">2</button>
+                <button class="numpad-btn" data-num="3">3</button>
+                <button class="numpad-btn" data-num="4">4</button>
+                <button class="numpad-btn" data-num="5">5</button>
+                <button class="numpad-btn" data-num="6">6</button>
+                <button class="numpad-btn" data-num="7">7</button>
+                <button class="numpad-btn" data-num="8">8</button>
+                <button class="numpad-btn" data-num="9">9</button>
+                <button class="numpad-btn numpad-clear" data-num="clear">✕</button>
+                <button class="numpad-btn" data-num="0">0</button>
+                <button class="numpad-btn numpad-back" data-num="back">⌫</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="mainApp" style="display:none;">
         <!-- Header -->
         <header class="header">
             <div class="kuromi-banner">🖤 💀 🎀 ✨ 🎀 💀 🖤</div>
@@ -46,9 +76,9 @@
 
         <!-- Week Navigation -->
         <nav class="week-nav">
-            <button id="prevWeek" aria-label="Previous week">◀</button>
+            <button id="prevWeek" class="nav-btn" aria-label="Previous week">◀</button>
             <span class="week-label" id="weekLabel">Loading...</span>
-            <button id="nextWeek" aria-label="Next week">▶</button>
+            <button id="nextWeek" class="nav-btn" aria-label="Next week">▶</button>
         </nav>
 
         <!-- Week Progress -->
@@ -81,6 +111,15 @@
             </table>
         </div>
 
+        <!-- Confirm Button -->
+        <div class="confirm-section">
+            <p class="confirm-hint" id="confirmHint">📝 Check today's completed items, then press confirm to save!</p>
+            <button class="confirm-btn" id="confirmBtn">
+                <span class="confirm-btn-icon">✅</span>
+                <span class="confirm-btn-text">Confirm & Save</span>
+            </button>
+        </div>
+
         <!-- Decorative row -->
         <div class="deco-row">💀 🎀 ⭐ 🖤 ✨ 🎀 💀</div>
 
@@ -88,15 +127,59 @@
         <div class="footer">Made with 💜 for Freya · Kuromi Style 🖤</div>
     </div>
 
-    <!-- Watch Fragment Modal -->
+    <!-- Watch Fragment Modal (elaborate animation) -->
     <div class="watch-modal-overlay" id="watchModal">
         <div class="watch-modal">
-            <span class="watch-icon">⌚</span>
-            <div class="modal-title" id="modalTitle">✨ New Watch Fragment! ✨</div>
-            <div class="modal-text" id="modalText">Amazing job, Freya!</div>
-            <div class="fragment-display" id="modalFragmentCount">0 / 100</div>
-            <div class="fragment-grid" id="fragmentGrid"></div>
-            <button class="close-btn" id="closeWatchModal">Got it! 🎀</button>
+            <!-- Stage 1: Watch assembling -->
+            <div class="watch-anim-stage" id="watchStage1">
+                <div class="watch-assemble">
+                    <div class="watch-body" id="watchBody">
+                        <div class="watch-face" id="watchFace">
+                            <div class="watch-glow-ring"></div>
+                            <div class="watch-center-dot"></div>
+                            <div class="watch-hand watch-hand-hour" id="watchHandHour"></div>
+                            <div class="watch-hand watch-hand-minute" id="watchHandMinute"></div>
+                            <div class="watch-hour-mark" style="--i:0"></div>
+                            <div class="watch-hour-mark" style="--i:1"></div>
+                            <div class="watch-hour-mark" style="--i:2"></div>
+                            <div class="watch-hour-mark" style="--i:3"></div>
+                            <div class="watch-hour-mark" style="--i:4"></div>
+                            <div class="watch-hour-mark" style="--i:5"></div>
+                            <div class="watch-hour-mark" style="--i:6"></div>
+                            <div class="watch-hour-mark" style="--i:7"></div>
+                            <div class="watch-hour-mark" style="--i:8"></div>
+                            <div class="watch-hour-mark" style="--i:9"></div>
+                            <div class="watch-hour-mark" style="--i:10"></div>
+                            <div class="watch-hour-mark" style="--i:11"></div>
+                        </div>
+                        <div class="watch-band watch-band-top"></div>
+                        <div class="watch-band watch-band-bottom"></div>
+                        <div class="watch-crown"></div>
+                    </div>
+                    <div class="sparkle-container" id="sparkleContainer"></div>
+                </div>
+            </div>
+
+            <!-- Stage 2: Fragment info -->
+            <div class="watch-anim-stage" id="watchStage2" style="display:none;">
+                <div class="modal-title" id="modalTitle">✨ New Watch Fragment! ✨</div>
+                <div class="modal-text" id="modalText">Amazing job, Freya!</div>
+                <div class="fragment-display" id="modalFragmentCount">0 / 100</div>
+                <div class="fragment-grid" id="fragmentGrid"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirm dialog -->
+    <div class="confirm-dialog-overlay" id="confirmDialog">
+        <div class="confirm-dialog">
+            <div class="confirm-dialog-icon">📋</div>
+            <p class="confirm-dialog-text">Are you sure you want to save today's progress?<br><span
+                    class="confirm-dialog-sub">请确认后再提交</span></p>
+            <div class="confirm-dialog-buttons">
+                <button class="dialog-btn dialog-btn-cancel" id="dialogCancel">Cancel</button>
+                <button class="dialog-btn dialog-btn-ok" id="dialogOk">Yes, Save! ✨</button>
+            </div>
         </div>
     </div>
 
