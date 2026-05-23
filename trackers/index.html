@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Trackers family check-in dashboard">
+    <title>Trackers</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main class="home-shell">
+        <header class="home-header">
+            <div>
+                <p class="eyebrow">Trackers</p>
+                <h1>所有人的打卡主页</h1>
+            </div>
+            <section class="password-panel" aria-label="当前设备密码">
+                <div>
+                    <span class="panel-label">当前设备</span>
+                    <strong id="passwordState">No password saved</strong>
+                </div>
+                <form id="passwordForm" class="password-form">
+                    <input id="passwordInput" type="password" autocomplete="current-password" placeholder="输入页面密码">
+                    <button type="submit">记住</button>
+                    <button id="clearPassword" type="button" class="ghost-button">清除</button>
+                </form>
+            </section>
+        </header>
+
+        <section class="notice-band">
+            <p>所有页面都可以查看。编辑、上传或改密码时，会用这台设备保存的密码和对应页面密码比较。</p>
+        </section>
+
+        <section class="ranking-panel" aria-label="排名">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">Leaderboard</p>
+                    <h2>本周排名</h2>
+                </div>
+                <span id="rankingUpdated">本地数据</span>
+            </div>
+            <div class="ranking-table-wrap">
+                <table class="ranking-table">
+                    <thead>
+                        <tr>
+                            <th>名字</th>
+                            <th>排名</th>
+                            <th>
+                                <button id="sortByProgress" class="sort-button" type="button">完成度</button>
+                            </th>
+                            <th>
+                                <button id="sortByDone" class="sort-button" type="button">完成数量</button>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="rankingBody"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
