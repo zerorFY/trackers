@@ -63,7 +63,7 @@ function renderRanking(rankedPeople) {
     rankedPeople.forEach((person, index) => {
         const row = document.createElement('tr');
         row.innerHTML = `
-            <td><a href="${person.href}">${person.name}</a></td>
+            <td class="item-cell"><a class="item-name" href="${person.href}">${person.name}</a></td>
             <td>#${index + 1}</td>
             <td>
                 <div class="ranking-progress">
@@ -79,8 +79,21 @@ function renderRanking(rankedPeople) {
     });
 }
 
+function renderSummary(people) {
+    const totalPeople = people.length;
+    const totalDone = people.reduce((sum, person) => sum + person.done, 0);
+    const totalTasks = people.reduce((sum, person) => sum + person.total, 0);
+    const progress = totalTasks ? Math.round((totalDone / totalTasks) * 100) : 0;
+
+    document.getElementById('peopleCount').textContent = totalPeople;
+    document.getElementById('totalDone').textContent = totalDone;
+    document.getElementById('overallProgress').textContent = `${progress}%`;
+}
+
 function renderDashboard() {
-    const rankedPeople = sortForRanking(getPeopleSummaries(), sortMode);
+    const people = getPeopleSummaries();
+    const rankedPeople = sortForRanking(people, sortMode);
+    renderSummary(people);
     renderSortState();
     renderRanking(rankedPeople);
 }

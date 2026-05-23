@@ -6,52 +6,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Trackers family check-in dashboard">
     <title>Trackers</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="tracker-shell.css">
 </head>
 
 <body>
-    <main class="home-shell">
-        <header class="home-header">
+    <main class="app-shell">
+        <section class="topbar">
             <div>
-                <p class="eyebrow">Trackers</p>
-                <h1>所有人的打卡主页</h1>
+                <p class="eyebrow">Weekly Check-in</p>
+                <h1>Trackers</h1>
             </div>
-            <section class="password-panel" aria-label="当前设备密码">
-                <div>
-                    <span class="panel-label">当前设备</span>
-                    <strong id="passwordState">No password saved</strong>
-                </div>
-                <form id="passwordForm" class="password-form">
-                    <input id="passwordInput" type="password" autocomplete="current-password" placeholder="输入页面密码">
-                    <button type="submit">记住</button>
-                    <button id="clearPassword" type="button" class="ghost-button">清除</button>
-                </form>
-            </section>
-        </header>
-
-        <section class="notice-band">
-            <p>所有页面都可以查看。编辑、上传或改密码时，会用这台设备保存的密码和对应页面密码比较。</p>
+            <div class="week-card">
+                <span class="week-label">Current Device</span>
+                <strong id="passwordState">No password saved</strong>
+            </div>
         </section>
 
-        <section class="ranking-panel" aria-label="排名">
-            <div class="section-heading">
-                <div>
-                    <p class="eyebrow">Leaderboard</p>
-                    <h2>本周排名</h2>
-                </div>
-                <span id="rankingUpdated">本地数据</span>
+        <section class="summary-strip" aria-label="Tracker summary">
+            <div>
+                <span class="summary-label">People</span>
+                <strong id="peopleCount">0</strong>
             </div>
-            <div class="ranking-table-wrap">
-                <table class="ranking-table">
+            <div>
+                <span class="summary-label">Completed</span>
+                <strong id="totalDone">0</strong>
+            </div>
+            <div>
+                <span class="summary-label">Progress</span>
+                <strong id="overallProgress">0%</strong>
+            </div>
+        </section>
+
+        <section id="accessGate" class="access-gate">
+            <h2>Access Code</h2>
+            <form id="passwordForm" class="access-form">
+                <input id="passwordInput" type="password" autocomplete="current-password" placeholder="Enter access code">
+                <button type="submit">Connect</button>
+                <button id="clearPassword" type="button" class="secondary-button">Clear</button>
+            </form>
+        </section>
+
+        <section class="tracker-panel">
+            <div class="panel-header">
+                <h2>Weekly Ranking</h2>
+                <span id="rankingUpdated" class="save-status saved">Local data</span>
+            </div>
+
+            <div class="table-wrap">
+                <table class="tracker-table ranking-table">
                     <thead>
                         <tr>
-                            <th>名字</th>
-                            <th>排名</th>
+                            <th class="item-col">Name</th>
+                            <th>Rank</th>
                             <th>
-                                <button id="sortByProgress" class="sort-button" type="button">完成度</button>
+                                <button id="sortByProgress" class="sort-button" type="button">Progress</button>
                             </th>
                             <th>
-                                <button id="sortByDone" class="sort-button" type="button">完成数量</button>
+                                <button id="sortByDone" class="sort-button" type="button">Done</button>
                             </th>
                         </tr>
                     </thead>
