@@ -34,14 +34,6 @@ body {
     padding: 32px 0 48px;
 }
 
-.back-link {
-    display: inline-block;
-    margin-bottom: 18px;
-    color: var(--accent-strong);
-    font-weight: 900;
-    text-decoration: none;
-}
-
 .topbar {
     display: flex;
     align-items: flex-end;
@@ -250,10 +242,89 @@ h2 {
     width: 250px;
 }
 
+.item-cell {
+    text-align: left;
+}
+
+.item-name {
+    display: block;
+    font-size: 1rem;
+    font-weight: 900;
+}
+
+.item-detail {
+    display: block;
+    margin-top: 5px;
+    color: var(--muted);
+    font-size: 0.85rem;
+}
+
+.day-name {
+    display: block;
+    font-size: 0.96rem;
+}
+
+.day-date {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 0.8rem;
+}
+
+.check-cell.disabled {
+    background: var(--disabled);
+    color: var(--disabled-text);
+}
+
+.not-scheduled {
+    color: var(--disabled-text);
+    font-size: 0.82rem;
+    font-weight: 800;
+}
+
+.check-button {
+    width: 42px;
+    height: 42px;
+    border: 2px solid #b7aa99;
+    border-radius: 50%;
+    background: #fff;
+    color: transparent;
+    cursor: pointer;
+    font-size: 1.25rem;
+    line-height: 1;
+}
+
+.check-button:hover {
+    border-color: var(--accent);
+}
+
+.check-button.checked {
+    border-color: var(--accent);
+    background: var(--accent);
+    color: #fff;
+}
+
+.check-button:disabled {
+    cursor: progress;
+    opacity: 0.68;
+}
+
+.update-time {
+    display: block;
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 0.72rem;
+    font-weight: 700;
+}
+
 .empty-row {
     height: 120px;
     color: var(--muted);
     font-weight: 800;
+}
+
+.today {
+    box-shadow: inset 0 0 0 3px rgba(216, 149, 39, 0.24);
 }
 
 @media (max-width: 760px) {

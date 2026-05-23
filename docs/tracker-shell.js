@@ -6,7 +6,6 @@ const pageName = document.body.dataset.person || 'Tracker';
 
 document.body.innerHTML = `
     <main class="app-shell">
-        <a class="back-link" href="../index.html">Back to Trackers</a>
         <section class="topbar">
             <div>
                 <p class="eyebrow">Weekly Check-in</p>
@@ -33,7 +32,7 @@ document.body.innerHTML = `
             </div>
         </section>
 
-        <section id="accessGate" class="access-gate">
+        <section id="accessGate" class="access-gate" hidden>
             <h2>Access Code</h2>
             <form id="accessForm" class="access-form">
                 <input id="accessToken" type="password" autocomplete="current-password" placeholder="Enter access code">
@@ -44,7 +43,7 @@ document.body.innerHTML = `
         <section class="tracker-panel">
             <div class="panel-header">
                 <h2>Weekly Plan</h2>
-                <span id="saveStatus" class="save-status">Read Only</span>
+                <span id="saveStatus" class="save-status">Connecting...</span>
             </div>
             <p id="errorMessage" class="error-message" hidden></p>
 
@@ -89,6 +88,13 @@ function formatShortDate(date) {
     return `${date.getMonth() + 1}/${date.getDate()}`;
 }
 
+function formatFullDate(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+}
+
 function getWeekDates() {
     const monday = getMonday(new Date());
     return DAY_NAMES.map((day, index) => ({
@@ -97,12 +103,17 @@ function getWeekDates() {
     }));
 }
 
+function isToday(date) {
+    return formatFullDate(new Date()) === formatFullDate(date);
+}
+
 function renderHeader() {
     const header = document.getElementById('dayHeader');
     header.innerHTML = '<th class="item-col">Item</th>';
 
     getWeekDates().forEach(({ day, date }) => {
         const th = document.createElement('th');
+        if (isToday(date)) th.classList.add('today');
         th.innerHTML = `<span class="day-name">${day}</span><span class="day-date">${formatShortDate(date)}</span>`;
         header.appendChild(th);
     });
@@ -110,13 +121,15 @@ function renderHeader() {
 
 function renderEmpty() {
     document.getElementById('trackerBody').innerHTML =
-        '<tr><td class="empty-row" colspan="8">This tracker shell is ready. Sheet data is not connected yet.</td></tr>';
+        '<tr><td class="empty-row" colspan="8">No tracker items found in the Items sheet.</td></tr>';
 }
 
 function renderAccessState() {
     const canEdit = getSavedPassword() === PAGE_PASSWORD;
-    document.getElementById('saveStatus').textContent = canEdit ? 'Password Ready' : 'Read Only';
-    document.getElementById('saveStatus').className = `save-status ${canEdit ? 'saved' : ''}`.trim();
+    const accessGate = document.getElementById('accessGate');
+    accessGate.hidden = canEdit;
+    document.getElementById('saveStatus').textContent = canEdit ? 'Connected to Sheet' : 'Access needed';
+    document.getElementById('saveStatus').className = `save-status ${canEdit ? 'saved' : 'error'}`.trim();
 }
 
 function render() {
