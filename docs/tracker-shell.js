@@ -4,6 +4,64 @@ const DAY_NAMES = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Satu
 
 const pageName = document.body.dataset.person || 'Tracker';
 
+document.body.innerHTML = `
+    <main class="app-shell">
+        <a class="back-link" href="../index.html">Back to Trackers</a>
+        <section class="topbar">
+            <div>
+                <p class="eyebrow">Weekly Check-in</p>
+                <h1 id="pageTitle">${pageName}'s Tracker</h1>
+            </div>
+            <div class="week-card">
+                <span class="week-label">Current Week</span>
+                <strong id="weekRange">Loading...</strong>
+            </div>
+        </section>
+
+        <section class="summary-strip" aria-label="Weekly summary">
+            <div>
+                <span class="summary-label">Done</span>
+                <strong id="doneCount">0</strong>
+            </div>
+            <div>
+                <span class="summary-label">Total</span>
+                <strong id="totalCount">0</strong>
+            </div>
+            <div>
+                <span class="summary-label">Progress</span>
+                <strong id="progressPct">0%</strong>
+            </div>
+        </section>
+
+        <section id="accessGate" class="access-gate">
+            <h2>Access Code</h2>
+            <form id="accessForm" class="access-form">
+                <input id="accessToken" type="password" autocomplete="current-password" placeholder="Enter access code">
+                <button type="submit">Connect</button>
+            </form>
+        </section>
+
+        <section class="tracker-panel">
+            <div class="panel-header">
+                <h2>Weekly Plan</h2>
+                <span id="saveStatus" class="save-status">Read Only</span>
+            </div>
+            <p id="errorMessage" class="error-message" hidden></p>
+
+            <div class="table-wrap">
+                <table class="tracker-table">
+                    <thead>
+                        <tr id="dayHeader">
+                            <th class="item-col">Item</th>
+                        </tr>
+                    </thead>
+                    <tbody id="trackerBody"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+`;
+
 function getSavedPassword() {
     return localStorage.getItem(PASSWORD_STORAGE_KEY) || '';
 }

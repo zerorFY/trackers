@@ -5,7 +5,7 @@ const PEOPLE = [
     { name: 'Lora', href: 'lora/index.html', done: 0, total: 0, password: '123' },
     { name: 'Mia', href: 'mia/index.html', done: 0, total: 0, password: '123' },
     { name: 'Theodore', href: 'thedore/index.html', done: 0, total: 0, password: '123' },
-    { name: 'Sophia', href: '../sophia-tracker/index.html', done: 0, total: 0, password: '123' },
+    { name: 'Sophia', href: 'https://zerorfy.github.io/sophia-tracker/', done: 0, total: 0, password: '123' },
 ];
 
 const passwordForm = document.getElementById('passwordForm');
