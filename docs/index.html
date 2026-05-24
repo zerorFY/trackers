@@ -10,28 +10,50 @@
 </head>
 
 <body>
+    <div class="page-pattern" aria-hidden="true"></div>
+
     <main class="app-shell">
-        <section class="topbar">
-            <div>
-                <p class="eyebrow">Weekly Check-in</p>
+        <section class="hero">
+            <div class="hero-copy">
+                <div class="hero-mascot mini-title-mascot" aria-hidden="true">
+                    <div class="mascot">
+                        <div class="ear ear-left"></div>
+                        <div class="ear ear-right"></div>
+                        <div class="face">
+                            <div class="skull">☠</div>
+                            <div class="eye eye-left"></div>
+                            <div class="eye eye-right"></div>
+                            <div class="blush blush-left"></div>
+                            <div class="blush blush-right"></div>
+                        </div>
+                        <div class="tail"></div>
+                    </div>
+                </div>
                 <h1>Trackers</h1>
+                <p class="ribbon"><span>☠</span> Let's do our best! <span>♡</span></p>
             </div>
+
             <div class="week-card">
+                <span class="calendar-icon" aria-hidden="true">▣</span>
                 <span class="week-label">Current Device</span>
                 <strong id="passwordState">No password saved</strong>
+                <span class="mini-mascot" aria-hidden="true">☠</span>
             </div>
         </section>
 
         <section class="summary-strip" aria-label="Tracker summary">
-            <div>
+            <div class="summary-card">
+                <span class="summary-icon"><img src="assets/item-3.png" alt=""></span>
                 <span class="summary-label">People</span>
                 <strong id="peopleCount">0</strong>
             </div>
-            <div>
+            <div class="summary-card">
+                <span class="summary-icon"><img src="assets/item-2.png" alt=""></span>
                 <span class="summary-label">Completed</span>
                 <strong id="totalDone">0</strong>
             </div>
-            <div>
+            <div class="summary-card">
+                <span class="summary-icon"><img src="assets/item-4.png" alt=""></span>
                 <span class="summary-label">Progress</span>
                 <strong id="overallProgress">0%</strong>
             </div>
@@ -48,15 +70,17 @@
 
         <section class="tracker-panel">
             <div class="panel-header">
-                <h2>Weekly Ranking</h2>
-                <span id="rankingUpdated" class="save-status saved">Local data</span>
+                <h2><span aria-hidden="true">🎀</span> This Week's Ranking</h2>
+                <div class="panel-actions">
+                    <span id="rankingUpdated" class="save-status saved">Local copy</span>
+                </div>
             </div>
 
             <div class="table-wrap">
                 <table class="tracker-table ranking-table">
                     <thead>
                         <tr>
-                            <th class="item-col">Name</th>
+                            <th class="item-col">Item ✨</th>
                             <th>Rank</th>
                             <th>
                                 <button id="sortByProgress" class="sort-button" type="button">Progress</button>
@@ -70,6 +94,13 @@
                 </table>
             </div>
         </section>
+
+        <div class="sticker-floor" aria-hidden="true">
+            <span class="book-sticker"><img src="assets/item-1.png" alt=""></span>
+            <span class="bat-ribbon">♡──☠──♡</span>
+            <span class="potion-sticker"><img src="assets/item-4.png" alt=""></span>
+        </div>
+        <footer class="footer">Made with 💜 for Trackers</footer>
     </main>
 
     <script src="app.js"></script>
