@@ -10,22 +10,10 @@ document.body.innerHTML = `
     <main class="app-shell">
         <section class="hero">
             <div class="hero-copy">
-                <div class="hero-mascot mini-title-mascot" aria-hidden="true">
-                    <div class="mascot">
-                        <div class="ear ear-left"></div>
-                        <div class="ear ear-right"></div>
-                        <div class="face">
-                            <div class="skull">☠</div>
-                            <div class="eye eye-left"></div>
-                            <div class="eye eye-right"></div>
-                            <div class="blush blush-left"></div>
-                            <div class="blush blush-right"></div>
-                        </div>
-                        <div class="tail"></div>
-                    </div>
-                </div>
+                <span class="hero-sticker" aria-hidden="true"><img src="../assets/item-2.png" alt=""></span>
                 <h1 id="pageTitle">${pageName}'s Kuromi Week</h1>
                 <p class="ribbon"><span>☠</span> Let's do our best! <span>♡</span></p>
+                <a class="home-button" href="../index.html">Back to main</a>
             </div>
 
             <div class="week-card">
@@ -172,8 +160,8 @@ function render() {
     document.getElementById('doneCount').textContent = '0';
     document.getElementById('totalCount').textContent = '0';
     document.getElementById('progressPct').textContent = '0%';
-    document.getElementById('pageTitle').textContent = `${pageName}'s Tracker`;
-    document.title = `${pageName}'s Tracker`;
+    document.getElementById('pageTitle').textContent = `${pageName}'s Kuromi Week`;
+    document.title = `${pageName}'s Kuromi Week`;
     renderHeader();
     renderEmpty();
     renderAccessState();
