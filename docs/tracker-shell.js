@@ -1,17 +1,24 @@
-const PAGE_PASSWORD = '123';
 const PASSWORD_STORAGE_KEY = 'trackers_current_page_password';
 const DAY_NAMES = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
 const pageName = document.body.dataset.person || 'Tracker';
+const pageConfig = (window.TRACKER_PEOPLE || []).find(person =>
+    person.name.toLowerCase() === pageName.toLowerCase()
+) || {};
+const PAGE_PASSWORD = pageConfig.password || '123';
+const pageTitleText = `${pageName}'s Kuromi Week`;
+const titleImagePath = pageConfig.titleImage ? `../${pageConfig.titleImage}` : '';
+const titleMarkup = titleImagePath
+    ? `<img class="title-art personal-title-art" src="${titleImagePath}" alt="${pageTitleText}"><h1 id="pageTitle" class="sr-only">${pageTitleText}</h1>`
+    : `<span class="hero-sticker" aria-hidden="true"><img src="../assets/item-2.png" alt=""></span><h1 id="pageTitle">${pageTitleText}</h1>`;
 
 document.body.innerHTML = `
     <div class="page-pattern" aria-hidden="true"></div>
 
     <main class="app-shell">
         <section class="hero">
-            <div class="hero-copy">
-                <span class="hero-sticker" aria-hidden="true"><img src="../assets/item-2.png" alt=""></span>
-                <h1 id="pageTitle">${pageName}'s Kuromi Week</h1>
+            <div class="hero-copy${titleImagePath ? ' has-title-art' : ''}">
+                ${titleMarkup}
                 <p class="ribbon"><span>☠</span> Let's do our best! <span>♡</span></p>
                 <a class="home-button" href="../index.html">Back to main</a>
             </div>
@@ -160,8 +167,8 @@ function render() {
     document.getElementById('doneCount').textContent = '0';
     document.getElementById('totalCount').textContent = '0';
     document.getElementById('progressPct').textContent = '0%';
-    document.getElementById('pageTitle').textContent = `${pageName}'s Kuromi Week`;
-    document.title = `${pageName}'s Kuromi Week`;
+    document.getElementById('pageTitle').textContent = pageTitleText;
+    document.title = pageTitleText;
     renderHeader();
     renderEmpty();
     renderAccessState();

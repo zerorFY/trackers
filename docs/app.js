@@ -1,12 +1,6 @@
 const PASSWORD_STORAGE_KEY = 'trackers_current_page_password';
 
-const PEOPLE = [
-    { name: 'Freya', href: 'freya/index.html', done: 0, total: 0, password: '123' },
-    { name: 'Lora', href: 'lora/index.html', done: 0, total: 0, password: '123' },
-    { name: 'Mia', href: 'mia/index.html', done: 0, total: 0, password: '123' },
-    { name: 'Theodore', href: 'thedore/index.html', done: 0, total: 0, password: '123' },
-    { name: 'Sophia', href: 'https://zerorfy.github.io/sophia-tracker/', done: 0, total: 0, password: '123' },
-];
+const PEOPLE = window.TRACKER_PEOPLE || [];
 
 const passwordForm = document.getElementById('passwordForm');
 const passwordInput = document.getElementById('passwordInput');
